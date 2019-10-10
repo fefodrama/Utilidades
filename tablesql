@@ -1,0 +1,58 @@
+/* cria tabela CLIENTE
+*/
+CREATE TABLE CLIENTE
+(
+  codigo        integer constraint PK_ClIENTE primary key,
+  nome          varchar2(60) not null,
+  rua           varchar2(14) not null,
+  nr            NUMBER(4) not null,
+  bairro        varchar2(50) not null,
+  complemento   varchar2(100) not null,
+  cidade        varchar2(50) not null,
+  uf            varchar2(2) not null,
+  cep           varchar2(10)not null
+);
+
+/* cria tabela PF
+*/
+
+CREATE TABLE PF
+(
+codigo_cli      integer constraint PK_CLIENTE_PF primary key,
+cnpf            varchar2(14) not null,
+rg              varchar2(10) not null,
+data_nascimento   DATE NOT NULL,
+constraint FK_PK_CLIENTE FOREIGN KEY (codigo_cli) REFERENCES CLIENTE
+);
+
+/*cria tabela PJ
+*/
+
+CREATE TABLE PJ
+(
+codigo_cli      integer constraint PK_CLIENTE_PJ primary key,
+cnpj            varchar2(19) not null,
+ie              varchar2(10) not null,
+nome_fantasia   varchar2(60) not null,
+constraint FK_PK_CLIENTE FOREIGN KEY (codigo_cli) REFERENCES CLIENTE
+);
+
+/*cria tabela produto
+*/
+
+CREATE TABLE PRODUTO
+(
+codigo          integer constraint PK_PRODUTO primary key,
+descricao       varchar2(80) not null,
+unid_medida     varchar2(10) not null,
+);
+
+/*cria tabela FONE_CLIENTE
+*/
+
+CREATE TABLE FONE_CLIENTE
+(
+numero          varchar2(12) constraint PK_FONE_CLIENTE primary key,
+codigo_cli      integer constraint PK_FONE_CLIENTE primary key,
+constraint FK_PK_FONE_CLIENTE FOREIGN KEY (codigo_cli) REFERENCES FONE_CLIENTE
+);
